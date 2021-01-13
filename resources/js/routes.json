@@ -1,12 +1,14 @@
 {
-    "": "about",
+    "home": "\/",
+    "search": "search",
+    "users.create": "api\/users\/{param}",
+    "users.prover": "api\/users\/{param}",
+    "users.index": "api\/users\/{email}",
     "tovars.index": "api\/tovars",
     "tovars.create": "api\/tovars\/create",
     "tovars.store": "api\/tovars",
     "tovars.show": "api\/tovars\/{tovar}",
     "tovars.edit": "api\/tovars\/{tovar}\/edit",
     "tovars.update": "api\/tovars\/{tovar}",
-    "tovars.destroy": "api\/tovars\/{tovar}",
-    "home": "\/",
-    "search": "search"
+    "tovars.destroy": "api\/tovars\/{tovar}"
 }

@@ -24,7 +24,7 @@ const header = new Vue({
 
 const app = new Vue({
     el: '#my-app',
-    //render:h=>h(App),
+  //  render:h=>h(App),
     router
 });
 

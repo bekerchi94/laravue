@@ -15,6 +15,7 @@
 <div id="header"></div>
 <div id="my-app">
 
+
 </div> <!-- my app -->
 
 <script src="{{ asset('js/app.js') }}" defer></script>

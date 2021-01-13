@@ -18,6 +18,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 */
-
+//Route::middleware('auth:api')->resource('users','UserController');
 //Route::middleware('auth:api')->resource('tovars','TovarController');
+
+Route::get('/users/{email}', 'UserController@index');
+Route::get('/users/{email}/{pass}', 'UserController@prover');
+Route::get('/users/{email}/{name}/{pass}', 'UserController@create');
 Route::resource('tovars','TovarController');

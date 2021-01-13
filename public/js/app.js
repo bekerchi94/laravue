@@ -2050,6 +2050,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _route__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../route */ "./resources/js/route.js");
 //
 //
 //
@@ -2086,8 +2089,140 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "header",
+  data: function data() {
+    return {
+      passhash: "",
+      log: false,
+      pemail: "",
+      dalval: 0,
+      ppass: "",
+      pname: "",
+      ppass1: "",
+      ppass2: "",
+      errn: "",
+      errp: "",
+      idsess: 0,
+      prod: "продолжить"
+    };
+  },
+  methods: {
+    voiti: function voiti() {
+      this.log = true;
+    },
+    zakr: function zakr() {
+      this.pemail = '';
+      this.log = false;
+      this.log = false;
+      this.dalval = 0;
+      this.ppass = "";
+      this.pname = "";
+      this.ppass1 = "";
+      this.ppass2 = "";
+      this.errn = "";
+      this.errp = "";
+      this.prod = "продолжить";
+    },
+    dalee: function dalee() {
+      var _this = this;
+
+      if (this.dalval == 3) {
+        this.prod = "сохранить";
+
+        if (this.ppass1 == this.ppass2) {
+          axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(Object(_route__WEBPACK_IMPORTED_MODULE_1__["default"])("users.create") + this.pemail + "/" + this.pname + "/" + this.ppass1).then(function (response) {
+            _this.pname = response.data.username;
+            _this.idsess = 1;
+            _this.log = false;
+            console.log(response.data);
+          });
+        } else {
+          this.errp = "пароли не совподает!";
+        }
+      }
+
+      if (this.dalval == 2) {
+        if (this.pname == "") {
+          this.errn = "Поля не должен быть пустым";
+        } else {
+          this.errn = "";
+          this.dalval = 3;
+        }
+      }
+
+      if (this.dalval == 1) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(Object(_route__WEBPACK_IMPORTED_MODULE_1__["default"])("users.prover") + this.pemail + "/" + this.ppass).then(function (response) {
+          _this.pname = response.data.name;
+          _this.idsess = 1;
+          _this.log = false;
+        });
+      }
+
+      if (this.dalval == 0) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(Object(_route__WEBPACK_IMPORTED_MODULE_1__["default"])("users.index") + this.pemail).then(function (response) {
+          if (response.data.isset == "false") {
+            _this.dalval = 2;
+          } else {
+            _this.dalval = 1;
+            _this.prod = "войти";
+          }
+        });
+      }
+    }
+  },
   mounted: function mounted() {
     console.log('Component mounted+++++++++++.');
   }
@@ -37832,19 +37967,323 @@ var render = function() {
         attrs: { id: "navbarColor03" }
       }),
       _vm._v(" "),
-      _c("div", { staticClass: "pull-right" }, [
-        _vm.idsess > 0
-          ? _c(
-              "div",
-              { staticClass: "btn-group mr-4", attrs: { id: "prof" } },
-              [_vm._m(1), _vm._v(" "), _vm._m(2)]
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        _vm._m(3),
-        _vm._v(" "),
-        _vm._m(4)
-      ])
+      _c(
+        "div",
+        { staticClass: "pull-right" },
+        [
+          _vm.idsess > 0
+            ? _c(
+                "div",
+                { staticClass: "btn-group mr-4", attrs: { id: "prof" } },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "text-white dropdown-toggle",
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "dropdown",
+                        "aria-haspopup": "true",
+                        "aria-expanded": "false"
+                      }
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "header-profile",
+                        attrs: { id: "Uimg", src: "#" }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { attrs: { id: "Unams" } }, [
+                        _vm._v(_vm._s(_vm.pname))
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(1)
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _vm.idsess == 0
+            ? [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-outline-light my-2 my-sm-0",
+                    on: { click: _vm.voiti }
+                  },
+                  [
+                    _c("i", { staticClass: "fa fa-sign-in mr-3" }),
+                    _vm._v("войти")
+                  ]
+                )
+              ]
+            : _vm._e()
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _vm.log
+        ? _c(
+            "div",
+            { staticClass: "iactive" },
+            [
+              _c("center", [
+                _c("div", { staticClass: "login" }, [
+                  _c("h3", [_vm._v("Вход и регистрация")]),
+                  _vm._v(" "),
+                  _c("h5", [_vm._v("по email")]),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "im-x inx",
+                      on: {
+                        click: function($event) {
+                          return _vm.zakr()
+                        }
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "fa fa-times" }),
+                      _c("span", { staticClass: "tt" }, [_vm._v("закрыть")])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("form", { staticClass: "inf", attrs: { action: "#" } }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "control-label inl",
+                        attrs: { for: "phone" }
+                      },
+                      [_vm._v("email")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "inner-addon left-addon ind" }, [
+                      _c("i", { staticClass: "fa fa-envelope" }),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.pemail,
+                            expression: "pemail"
+                          }
+                        ],
+                        staticClass: "form-control inin",
+                        attrs: { type: "text", id: "vhphone" },
+                        domProps: { value: _vm.pemail },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.pemail = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm.dalval == 1
+                      ? _c("div", [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "control-label inl",
+                              attrs: { for: "vhkod" }
+                            },
+                            [_vm._v("пароль:")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "inner-addon left-addon ind" },
+                            [
+                              _c("i", { staticClass: "fa fa-commenting-o" }),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.ppass,
+                                    expression: "ppass"
+                                  }
+                                ],
+                                staticClass: "form-control inin",
+                                attrs: { type: "password", id: "vhkod" },
+                                domProps: { value: _vm.ppass },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.ppass = $event.target.value
+                                  }
+                                }
+                              })
+                            ]
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.dalval > 1
+                      ? _c("div", [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "control-label inl",
+                              attrs: { for: "nameu" }
+                            },
+                            [_vm._v("Имя пользователя:")]
+                          ),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.errn))
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "inner-addon left-addon ind" },
+                            [
+                              _c("i", { staticClass: "fa fa-user" }),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.pname,
+                                    expression: "pname"
+                                  }
+                                ],
+                                staticClass: "form-control inin",
+                                attrs: { type: "text", id: "nameu" },
+                                domProps: { value: _vm.pname },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.pname = $event.target.value
+                                  }
+                                }
+                              })
+                            ]
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.dalval == 3
+                      ? _c("div", [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "control-label inl",
+                              attrs: { for: "pass" }
+                            },
+                            [_vm._v("Придумайте пароль:")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "inner-addon left-addon ind" },
+                            [
+                              _c("i", { staticClass: "fa fa-user" }),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.ppass1,
+                                    expression: "ppass1"
+                                  }
+                                ],
+                                staticClass: "form-control inin",
+                                attrs: { type: "password", id: "pass" },
+                                domProps: { value: _vm.ppass1 },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.ppass1 = $event.target.value
+                                  }
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "control-label inl",
+                              attrs: { for: "pass2" }
+                            },
+                            [_vm._v("Повторите пароль:")]
+                          ),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.err))
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "inner-addon left-addon ind" },
+                            [
+                              _c("i", { staticClass: "fa fa-user" }),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.ppass2,
+                                    expression: "ppass2"
+                                  }
+                                ],
+                                staticClass: "form-control inin",
+                                attrs: { type: "password", id: "pass2" },
+                                domProps: { value: _vm.ppass2 },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.ppass2 = $event.target.value
+                                  }
+                                }
+                              })
+                            ]
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", { attrs: { id: "imya" } }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-info btn-block inb",
+                        attrs: { id: "dalee" },
+                        on: { click: _vm.dalee }
+                      },
+                      [_vm._v(_vm._s(_vm.prod))]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { attrs: { id: "nazad" } })
+                  ])
+                ])
+              ])
+            ],
+            1
+          )
+        : _vm._e()
     ]
   )
 }
@@ -37867,31 +38306,6 @@ var staticRenderFns = [
         }
       },
       [_c("span", { staticClass: "navbar-toggler-icon" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "text-white dropdown-toggle",
-        attrs: {
-          type: "button",
-          "data-toggle": "dropdown",
-          "aria-haspopup": "true",
-          "aria-expanded": "false"
-        }
-      },
-      [
-        _c("img", {
-          staticClass: "header-profile",
-          attrs: { id: "Uimg", src: "#" }
-        }),
-        _vm._v(" "),
-        _c("span", { attrs: { id: "Unams" } }, [_vm._v("Алекс")])
-      ]
     )
   },
   function() {
@@ -37944,15 +38358,6 @@ var staticRenderFns = [
     return _c("button", { staticClass: "btn btn-outline-light my-2 my-sm-0" }, [
       _c("i", { staticClass: "fa fa-bullhorn mr-3" }),
       _vm._v("Подать обявление")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "btn btn-outline-light my-2 my-sm-0" }, [
-      _c("i", { staticClass: "fa fa-sign-in mr-3" }),
-      _vm._v("войти")
     ])
   }
 ]
@@ -53237,7 +53642,7 @@ var header = new Vue({
 });
 var app = new Vue({
   el: '#my-app',
-  //render:h=>h(App),
+  //  render:h=>h(App),
   router: _router__WEBPACK_IMPORTED_MODULE_1__["default"]
 });
 
@@ -53552,10 +53957,10 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************!*\
   !*** ./resources/js/routes.json ***!
   \**********************************/
-/*! exports provided: , tovars.index, tovars.create, tovars.store, tovars.show, tovars.edit, tovars.update, tovars.destroy, home, search, default */
+/*! exports provided: home, search, users.create, users.prover, users.index, tovars.index, tovars.create, tovars.store, tovars.show, tovars.edit, tovars.update, tovars.destroy, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"\":\"about\",\"tovars.index\":\"api/tovars\",\"tovars.create\":\"api/tovars/create\",\"tovars.store\":\"api/tovars\",\"tovars.show\":\"api/tovars/{tovar}\",\"tovars.edit\":\"api/tovars/{tovar}/edit\",\"tovars.update\":\"api/tovars/{tovar}\",\"tovars.destroy\":\"api/tovars/{tovar}\",\"home\":\"/\",\"search\":\"search\"}");
+module.exports = JSON.parse("{\"home\":\"/\",\"search\":\"search\",\"users.create\":\"api/users/{param}\",\"users.prover\":\"api/users/{param}\",\"users.index\":\"api/users/{email}\",\"tovars.index\":\"api/tovars\",\"tovars.create\":\"api/tovars/create\",\"tovars.store\":\"api/tovars\",\"tovars.show\":\"api/tovars/{tovar}\",\"tovars.edit\":\"api/tovars/{tovar}/edit\",\"tovars.update\":\"api/tovars/{tovar}\",\"tovars.destroy\":\"api/tovars/{tovar}\"}");
 
 /***/ }),
 
@@ -53577,8 +53982,8 @@ module.exports = JSON.parse("{\"\":\"about\",\"tovars.index\":\"api/tovars\",\"t
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\OSPanel\domains\minilaravel.kg\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\OSPanel\domains\minilaravel.kg\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! d:\OSPanel\domains\minilaravel.kg\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! d:\OSPanel\domains\minilaravel.kg\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
